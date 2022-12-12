@@ -19,6 +19,7 @@ export default function App() {
   const [feelsLike, setFeelsLike] = useState(null);
   const [sunrise, setSunRise] = useState(null);
   const [sunset, setSunSet] = useState(null);
+  const [timezone, setTimeZone] = useState(null);
   
   const [hour, setHour] = useState(null);
   const [minute, setMinute] = useState(null);
@@ -41,8 +42,9 @@ export default function App() {
           setHumidity(data["main"]["humidity"]);
           setWindspeed(data["wind"]["speed"]);
           setCountryCode(data["sys"]["country"]);
-          setSunRise(data["sys"]["sunrise"]);
-          setSunSet(data["sys"]["sunset"]);
+          setSunRise(new Date((data.sys.sunrise + data.timezone) * 1000));
+          setSunSet(new Date((data.sys.sunset + data.timezone) * 1000));
+          setTimeZone(new Date((data.timezone) * 1000));
           SetWeatherDesc(data["weather"]["0"]["description"]);
         })
         .catch((e) => alert(e))
@@ -106,7 +108,7 @@ export default function App() {
   });
 
   return (
-    <div className="bg-blue-500 pt-6">
+    <div className="bg-blue-500 pt-6 h-screen">
       <div className="flex justify-center">
         <button className="px-4" onClick={() => {setPlace('London'); Search();}}>London</button>
         <button className="px-4" onClick={() => {setPlace('Sydney'); Search();}}>Sydney</button>
