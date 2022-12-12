@@ -8,7 +8,7 @@ export default function App() {
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   const [place, setPlace] = useState(null);
-  const [CelciusUnit, setCelciusUnit] = useState(true);
+  const [celciusUnit, setCelciusUnit] = useState(true);
   const [countryCode, setCountryCode] = useState(null);
   const [curTemp, setCurTemp] = useState(null);
   const [minTemp, setMinTemp] = useState(null);
@@ -37,10 +37,10 @@ export default function App() {
           setMinTemp(Math.round(parseInt(data["main"]["temp_min"]) - 273.15));
           setMaxTemp(Math.round(parseInt(data["main"]["temp_max"]) - 273.15));
           setCurTemp(Math.round(parseInt(data["main"]["temp"]) - 273.15));
+          setFeelsLike(Math.round(parseInt(data["main"]["feels_like"]) - 273.15));
           setHumidity(data["main"]["humidity"]);
           setWindspeed(data["wind"]["speed"]);
           setCountryCode(data["sys"]["country"]);
-          setFeelsLike(data["main"]["feels_like"]);
           setSunRise(data["sys"]["sunrise"]);
           setSunSet(data["sys"]["sunset"]);
           SetWeatherDesc(data["weather"]["0"]["description"]);
@@ -54,6 +54,20 @@ export default function App() {
 
   const ReturnMonth = (value) => {
     return months[value];
+  }
+
+  const ConvertToFahrenheit = () => {
+    setMinTemp(Math.round((9/5) * minTemp + 32));
+    setMaxTemp(Math.round((9/5) * maxTemp + 32));
+    setCurTemp(Math.round((9/5) * curTemp + 32));
+    setFeelsLike(Math.round((9/5) * feelsLike + 32));
+  }
+
+  const ConvertToCelcius = () => {
+    setMinTemp(Math.round((minTemp - 32) * (5/9)));
+    setMaxTemp(Math.round((maxTemp - 32) * (5/9)));
+    setCurTemp(Math.round((curTemp - 32) * (5/9)));
+    setFeelsLike(Math.round((feelsLike - 32) * (5/9)));
   }
 
   useEffect(() => {
@@ -107,8 +121,14 @@ export default function App() {
         />
         <button className="bg-blue-600 rounded-md px-3 hover:bg-blue-800" onClick={Search}>Search</button>
         <div className="ml-4">
-          <button className="mr-1">℃</button> |
-          <button className="ml-1">°F</button>
+          <button className={celciusUnit ? 'mr-1 text-white' : 'mr-1'} onClick={(e) => {
+            setCelciusUnit(true);
+            ConvertToCelcius();
+          }}>℃</button> |
+          <button className={celciusUnit ? 'ml-1' : 'ml-1 text-white'} onClick={(e) => {
+            setCelciusUnit(false);
+            ConvertToFahrenheit();
+          }}>°F</button>
         </div>
       </div>
       
@@ -119,7 +139,7 @@ export default function App() {
       </div>
 
       <div className="flex justify-center">
-        <Dashboard curTemp = {curTemp} minTemp={minTemp} maxTemp={maxTemp} humidity={humidity} windspeed={windspeed}
+        <Dashboard curTemp={curTemp} minTemp={minTemp} maxTemp={maxTemp} humidity={humidity} windspeed={windspeed}
          place = {place} countryCode = {countryCode} feelsLike = {feelsLike} sunrise = {sunrise} 
          weatherDesc = {weatherDesc} sunset = {sunset}
         />
