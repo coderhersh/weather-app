@@ -132,7 +132,7 @@ export default function App() {
         </div>
       </div>
       
-      <div className="flex justify-center">
+      <div className="flex justify-center text-gray-100 text-lg my-3">
         <p className="pr-2">{day}, {date} {ReturnMonth(month)}, {year} </p>
         |
         <p className="pl-2">Local Time: {hour}:{minute} {TC}</p>

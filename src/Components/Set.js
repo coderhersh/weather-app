@@ -9,8 +9,8 @@ export default function Set ({sunset}) {
     var minutes = date.getMinutes();
     return (
         <div className="flex px-1">
-            <button><BsFillSunsetFill/></button>
-            <h3 className="pl-1">{hours} : {minutes} {hours > 12 ? 'PM' : 'AM'}</h3>
+            <button><BsFillSunsetFill size={20} color="white"/></button>
+            <h3 className="pl-1 font-bold">Sunset: {hours} : {minutes} {hours > 12 ? 'PM' : 'AM'}</h3>
         </div>
     );
 }

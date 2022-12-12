@@ -7,10 +7,10 @@ export default function Dashboard ({curTemp, minTemp, maxTemp, humidity, windspe
     feelsLike, weatherDesc, sunrise, sunset}) {
     return (
         <div>
-            <Location place = {place} countryCode = {countryCode}/>
+            <Location place={place} countryCode={countryCode}/>
             <CurrentWeather weather={weatherDesc}/>
-            <MidPart curTime={curTemp} humidity={humidity} windspeed={windspeed} feelsLike={feelsLike}/>
-            <TempAndSun sunrise = {sunrise} sunset = {sunset} minTemp={minTemp} maxTemp={maxTemp}/>
+            <MidPart curTemp={curTemp} humidity={humidity} windspeed={windspeed} feelsLike={feelsLike}/>
+            <TempAndSun sunrise={sunrise} sunset={sunset} minTemp={minTemp} maxTemp={maxTemp}/>
         </div>
     );
 }

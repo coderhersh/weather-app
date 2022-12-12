@@ -10,8 +10,8 @@ export default function Rise ({sunrise}) {
     
     return (
         <div className="flex px-1">
-            <button><BsFillSunFill/></button>
-            <h3 className="pl-1">{hours} : {minutes} {hours > 12 ? 'PM' : 'AM' }</h3>
+            <button><BsFillSunFill size={20} color="white"/></button>
+            <h3 className="pl-1 font-bold">Sunrise: {hours} : {minutes} {hours > 12 ? 'PM' : 'AM' }</h3>
         </div>
     );
 }
