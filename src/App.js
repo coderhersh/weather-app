@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Dashboard from "./Components/Dashboard";
 
 export default function App() {
-  const API = 'faa2ff082ce6b7391d551537ed037a31';
+  const API = '';
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 
   'July', 'August', 'September', 'October', 'November', 'December'];
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
